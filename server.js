@@ -7,7 +7,7 @@ app.use(express.json());
 
 const setupServer = () => {
     // get all dinos
-    app.get("/api/dinosaur_db", async (_, res) => {
+    app.get("/api/dinosaur_db", async (req, res) => {
         const dinos = await knex.select().from('dinos')
         if (dinos) {
             res.json(dinos);
@@ -17,16 +17,24 @@ const setupServer = () => {
     })
 
     // get dino by name or id
-    app.get("/api/dinosaur_db/:nameOrId"), async (req, res) => {
+    app.get("/api/dinosaur_db/:nameOrId", async (req, res) => {
         const { nameOrId } = req.params;
         if (parseInt(nameOrId)) {
-            console.log("id:", nameOrId)
-            res.json(await knex.select().where({ id: nameOrId }))
+            const selectedDino = await knex.select().from('dinos').where({ id: nameOrId }).first();
+            if (selectedDino) {
+                res.json(selectedDino)
+            } else {
+                res.status(404).end()
+            }
         } else {
-            console.log("name is:", nameOrId)
-            res.json(await knex.select().where({ name: nameOrId }))
+            const selectedDino = await knex.select().from('dinos').where({ name: nameOrId }).first();
+            if (selectedDino) {
+                res.json(selectedDino)
+            } else {
+                res.status(404).end()
+            }
         }
-    }
+    });
 
     return app;
 }
