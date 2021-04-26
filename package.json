@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha  -r dotenv/config --exit",
+    "test": "mocha -r dotenv/config --exit",
     "start": "node -r dotenv/config client/index.js"
   },
   "repository": {
