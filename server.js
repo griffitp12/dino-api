@@ -34,6 +34,10 @@ const setupServer = () => {
                 res.status(404).end()
             }
         }
+
+        // add a dino
+        // update dino data
+        // delete dino by name or id
     });
 
     return app;
