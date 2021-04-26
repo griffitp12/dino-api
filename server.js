@@ -17,7 +17,7 @@ const setupServer = () => {
     })
 
     // get dino by name or id
-    app.get("/api/dinosaur_db:nameOrId"), async (req, res) => {
+    app.get("/api/dinosaur_db/:nameOrId"), async (req, res) => {
         const { nameOrId } = req.params;
         if (parseInt(nameOrId)) {
             console.log("id:", nameOrId)

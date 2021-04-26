@@ -1,4 +1,4 @@
-[
+const dinos = [
     {
       id: 1,
       name: 'Apatosaurus',
@@ -27,3 +27,5 @@
       size: 'Giant',
       comments: "I like it. That's all."  }
   ]
+
+  module.exports = { dinos }
