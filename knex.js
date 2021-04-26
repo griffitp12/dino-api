@@ -1,5 +1,5 @@
 const knex = require('knex')({
-    client: 'pg', //this is the postgres client
+    client: 'pg', 
     connection: {
         host: '127.0.0.1',
         user: process.env.DB_USER,
