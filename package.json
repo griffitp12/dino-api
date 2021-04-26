@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.95.4",
@@ -13,8 +14,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r dotenv/config server.js"
+    "test": "mocha",
+    "start": "node -r dotenv/config client/index.js"
   },
   "repository": {
     "type": "git",
