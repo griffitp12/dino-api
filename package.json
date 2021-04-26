@@ -1,0 +1,30 @@
+{
+  "name": "dino-api",
+  "version": "1.0.0",
+  "description": "CC19 solo api project",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "dotenv": "^8.2.0",
+    "knex": "^0.95.4",
+    "mocha": "^8.3.2",
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/griffitp12/dino-api.git"
+  },
+  "keywords": [
+    "dinos"
+  ],
+  "author": "Pete Griffith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/griffitp12/dino-api/issues"
+  },
+  "homepage": "https://github.com/griffitp12/dino-api#readme"
+}
