@@ -5,10 +5,12 @@ const app = express();
 app.use(express.json());
 
 app.get("/api/dinosaur_db", async (_, res) => {
-    console.log("hello from the server")
+    console.log("hello from the server");
+    res.status(200);
+    res.end();
 })
 
 const port = 9999 || process.env.DB_PORT;
 app.listen(9999, () => {
-    console.log(`Server running at https://localhost:${port}!`)
+    console.log(`Server running at https://localhost:${port}`)
 })
