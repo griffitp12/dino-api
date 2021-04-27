@@ -20,28 +20,36 @@ describe("Dinosaur API Server", () => {
     describe("GET /api/dinosaur_db", () => {
       it("should return a list of all dinos in the db", async () => {
         const res = await request.get("/api/dinosaur_db");
-        expect(res.body).to.deep.equal(dinos)
+        expect(res.body[1].name).to.deep.equal(dinos[1].name)
         res.should.have.status(200)
       })
     })
-    describe("GET /api/dinosaur_db/:nameOrId", () => {
-      it("should return the correct dinosaur when given a valid ID", async () => {
-        const res = await request.get("/api/dinosaur_db/1");
-        expect(res.body).to.deep.equal(dinos[0]);
-      })
+    describe("GET /api/dinosaur_db/:name", () => {
       it("should return the correct dinosaur when given a valid name", async () => {
         const res = await request.get("/api/dinosaur_db/Iguanadon");
-        expect(res.body).to.deep.equal(dinos[3]);
+        expect(res.body.name).to.deep.equal(dinos[3].name);
       })
-      it("should return an error when given an invalid param", async () => {
-        const res = await request.get("/api/dinosaur_db/6");
+      it("should return an error when given an invalid name", async () => {
+        const res = await request.get("/api/dinosaur_db/Iguana");
         res.should.have.status(404);
       });
     });
-    describe("POST /api/dinosaur_db", () => {
+    describe.only("POST /api/dinosaur_db/", () => {
+      /* console.log('🔥 about to try to connect') */
       it("should add a dinosaur of a given name", async () => {
-        const res = await request.post("api/dinosaur_db").send({name: 'Minmi'});
+        const res = await request.post("api/dinosaur_db/").send({name: 'Minmi'});
         expect(res.body).to.equal("Minmi added!")
+      })
+    })
+    describe("PATCH /api/dinosaur_db/:name", () => {
+      it("should add info to an already extant dino", async () => {
+        const newData = {
+          size: "small",
+          eats: "plants",
+          comments: "I like it...I wanna look at another one."
+        }
+        const res = await request.post("api/dinosaur_db/Minmi").send(newData)
+        console.log(res.body)
       })
     })
   });
