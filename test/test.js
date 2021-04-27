@@ -37,10 +37,10 @@ describe("Dinosaur API Server", () => {
     describe.only("POST /api/dinosaur_db/", () => {
       /* console.log('🔥 about to try to connect') */
       it("should add a dinosaur of a given name", async () => {
-        const res = await request.post("api/dinosaur_db/").send({name: 'Minmi'});
+        const res = await request.post("/api/dinosaur_db/").send({name: 'Minmi'});
         expect(res.body).to.equal("Minmi added!")
       })
-    })
+    });
     describe("PATCH /api/dinosaur_db/:name", () => {
       it("should add info to an already extant dino", async () => {
         const newData = {
@@ -48,8 +48,14 @@ describe("Dinosaur API Server", () => {
           eats: "plants",
           comments: "I like it...I wanna look at another one."
         }
-        const res = await request.post("api/dinosaur_db/Minmi").send(newData)
+        const res = await request.post("/api/dinosaur_db/Minmi").send(newData)
         console.log(res.body)
+      })
+    });
+    describe("DELETE /api/dinosaur_db/:name", () => {
+      it("should remove a dino", async () => {
+        const res = await request.delete("/api/dinosaur_db/Iguanadon")
+        expect(res.body).to.equal("Iguanadon extinct!")
       })
     })
   });

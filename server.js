@@ -7,7 +7,7 @@ app.use(express.json());
 
 const setupServer = () => {
     // get all dinos
-    app.get("/api/dinosaur_db", async (req, res) => {       
+    app.get("/api/dinosaur_db", async (req, res) => {
         const dinos = await knex.select().from('dinos')
         if (dinos) {
             res.json(dinos);
@@ -30,14 +30,10 @@ const setupServer = () => {
     // add a dino
     app.post("/api/dinosaur_db/", async (req, res) => {
         const dinoName = req.body.name;
-        try {
-            console.log('trying')
-            knex('dinos').insert({ name: dinoName });
-            res.send(`${dinoName} added!`);
-        }
-        catch {
-            res.status(404)
-        }
+        console.log('🔥', dinoName)
+        knex('dinos').insert({ name: dinoName });
+        res.json(`${dinoName} added!`);
+
     })
     // update dino data
     app.patch("/api/dinosaur_db/:name", async (req, res) => {
@@ -51,14 +47,10 @@ const setupServer = () => {
         }
     })
     // delete dino by name
-    app.patch("/api/dinosaur_db/:name", async (req, res) => {
+    app.delete("/api/dinosaur_db/:name", async (req, res) => {
         const { name } = req.params;
-        const selectedDino = await knex.select().from('dinos').where({ name: name }).first();
-        if (selectedDino) {
-            /* res.json(selectedDino) */
-        } else {
-            res.status(404).end()
-        }
+        await knex('dinos').where({ name: name }).del()
+        res.json(`${name} extinct!`)
     })
 
     return app;
