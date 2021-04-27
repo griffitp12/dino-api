@@ -1,5 +1,5 @@
 const express = require('express');
-const knex = require('./knex')
+const knex = require('./knexfilebasic')
 
 const app = express();
 
