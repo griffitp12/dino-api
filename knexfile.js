@@ -1,4 +1,4 @@
-// Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
 
@@ -8,7 +8,7 @@ module.exports = {
       host: '127.0.0.1',
       user: process.env.DB_USER,
       password: process.env.DB_PW,
-      database: process.env.DB_NAME
+      database: process.env.DB_NAME,
     },
     migrations: {
       directory: './db/migrations',
@@ -18,12 +18,13 @@ module.exports = {
     }
   },
 
-  staging: {
-    client: 'postgresql',
+   staging: {
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
+      host: '127.0.0.1',
+      user: process.env.DB_USER,
+      password: process.env.DB_PW,
+      database: process.env.DB_NAME,
     },
     pool: {
       min: 2,
@@ -33,7 +34,7 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   },
-/* 
+ 
   production: {
     client: 'postgresql',
     connection: {
@@ -48,6 +49,6 @@ module.exports = {
     migrations: {
       tableName: 'knex_migrations'
     }
-  } */
+  } 
 
 };

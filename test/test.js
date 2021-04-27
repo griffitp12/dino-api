@@ -36,6 +36,12 @@ describe("Dinosaur API Server", () => {
       it("should return an error when given an invalid param", async () => {
         const res = await request.get("/api/dinosaur_db/6");
         res.should.have.status(404);
+      });
+    });
+    describe("POST /api/dinosaur_db", () => {
+      it("should add a dinosaur of a given name", async () => {
+        const res = await request.post("api/dinosaur_db").send({name: 'Minmi'});
+        expect(res.body).to.equal("Minmi added!")
       })
     })
   });

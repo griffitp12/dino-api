@@ -1,7 +1,7 @@
 const e = require("express");
 
-exports.up = function(knex) {
-  knex.schema.createTable("dinos", table => {
+exports.up = async function(knex) {
+  return knex.schema.createTable("dinos", table => {
       table.increments();
       table.string("name").notNullable();
       table.string("eats");
@@ -11,5 +11,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  knex.schema.dropTableIfExists("dinos")
+  return knex.schema.dropTableIfExists("dinos")
 };

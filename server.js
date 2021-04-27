@@ -1,5 +1,5 @@
 const express = require('express');
-const knex = require('./knexfilebasic')
+const knex = require('./knexfile')
 
 const app = express();
 
@@ -36,6 +36,16 @@ const setupServer = () => {
         }
 
         // add a dino
+        app.post('/api/dinosaur_db', async (req, res) => {
+            const dinoName = req.body.name;
+            try {
+                knex('dinos').insert({name: dinoName});
+                res.send(`${dinoName} added!`);
+            }
+            catch {
+                res.status(404)
+            }
+        })
         // update dino data
         // delete dino by name or id
     });
