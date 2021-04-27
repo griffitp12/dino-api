@@ -12,7 +12,7 @@ const setupServer = () => {
         if (dinos) {
             res.json(dinos);
         } else {
-            res.status(404, "no dinos file dude").end
+            res.sendStatus(404).end
         }
     })
 
@@ -23,27 +23,26 @@ const setupServer = () => {
         if (selectedDino) {
             res.json(selectedDino)
         } else {
-            res.status(404).end()
+            res.sendStatus(404).end()
         }
     })
 
     // add a dino
     app.post("/api/dinosaur_db/", async (req, res) => {
         const dinoName = req.body.name;
-        console.log('🔥', dinoName)
-        knex('dinos').insert({ name: dinoName });
-        res.json(`${dinoName} added!`);
-
+        await knex('dinos').insert({ name: dinoName })
+        res.json(`${dinoName} added!`)
     })
+    
     // update dino data
     app.patch("/api/dinosaur_db/:name", async (req, res) => {
         const { name } = req.params;
-        const { info } = req.body.name;
-        const selectedDino = await knex.select().from('dinos').where({ name: name }).first();
+        const newData = req.body;
+        const selectedDino = await knex('dinos').where({ name: name }).update(newData);
         if (selectedDino) {
-            /* res.json(selectedDino) */
+            res.json(selectedDino).end()
         } else {
-            res.status(404).end()
+            res.status(404).send(`${selectedDino} didn't exist!`).end()
         }
     })
     // delete dino by name

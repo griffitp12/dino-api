@@ -29,13 +29,13 @@ describe("Dinosaur API Server", () => {
         const res = await request.get("/api/dinosaur_db/Iguanadon");
         expect(res.body.name).to.deep.equal(dinos[3].name);
       })
-      it("should return an error when given an invalid name", async () => {
+      it.only("should return an error when given an invalid name", async () => {
         const res = await request.get("/api/dinosaur_db/Iguana");
         res.should.have.status(404);
       });
     });
-    describe.only("POST /api/dinosaur_db/", () => {
-      /* console.log('🔥 about to try to connect') */
+    describe("POST /api/dinosaur_db/", () => {
+
       it("should add a dinosaur of a given name", async () => {
         const res = await request.post("/api/dinosaur_db/").send({name: 'Minmi'});
         expect(res.body).to.equal("Minmi added!")
@@ -44,12 +44,11 @@ describe("Dinosaur API Server", () => {
     describe("PATCH /api/dinosaur_db/:name", () => {
       it("should add info to an already extant dino", async () => {
         const newData = {
-          size: "small",
-          eats: "plants",
+          size: "Small",
+          eats: "Plants",
           comments: "I like it...I wanna look at another one."
         }
-        const res = await request.post("/api/dinosaur_db/Minmi").send(newData)
-        console.log(res.body)
+        const res = await request.patch("/api/dinosaur_db/Minmi").send(newData)
       })
     });
     describe("DELETE /api/dinosaur_db/:name", () => {
